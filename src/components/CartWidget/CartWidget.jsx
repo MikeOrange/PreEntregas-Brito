@@ -6,7 +6,7 @@ function CartWidget({count}) {
   return (
     <span>
       <span className='cart-count'>1</span>
-      <span><FaShoppingCart /></span>
+      <span className='cart-icon'><FaShoppingCart /></span>
     </span>
   )
 }
