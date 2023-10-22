@@ -1,6 +1,9 @@
 import React from 'react'
 import './App.css'
-import Navbar from './components/Navbar/Navbar';
+import MiNavbar from './components/MiNavbar/MiNavbar';
+import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
 
@@ -16,7 +19,8 @@ const saludo="Bienvenidos a Spinach Dev!"
 
   return (
     <>
-      <Navbar links={enlaces} nombreBrand={nombreBrand} greeting={saludo} />
+      <MiNavbar links={enlaces} nombreBrand={nombreBrand} />
+      <ItemListContainer greeting={saludo} />
     </>
   )
 }
