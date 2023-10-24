@@ -6,16 +6,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
-
-const enlaces = [
-  "Inicio",
-  "Cursos",
-  "Proyectos",
-  "Acerca de",
-  "Contacto"
-]
-const nombreBrand = "Spinach Dev"
-const saludo="Bienvenidos a Spinach Dev!"
+  const enlaces = [
+    "Inicio",
+    "Cursos",
+    "Proyectos",
+    "Acerca de",
+    "Contacto"
+  ]
+  const nombreBrand = "Spinach Dev"
+  const saludo="Bienvenidos a Spinach Dev!"
 
   return (
     <>
