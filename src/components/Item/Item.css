@@ -1,0 +1,13 @@
+.item-container {
+    border-style: solid;
+    border-color: gray;
+    border-width: 1px;
+    max-width: 200px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.item-image {
+    max-width: 100px;
+    width: 100%;
+}
