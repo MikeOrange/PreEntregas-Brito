@@ -12,12 +12,11 @@ function ItemList() {
                 fetch(itemsFile)
                 .then((response) => response.json())
                 .then((data) => resolve(data))
-            }, 2000);
+            }, 500);
         });
     }
 
     promiseData().then((data) => {
-        console.log(data);
         setProductData(data)
     })
 

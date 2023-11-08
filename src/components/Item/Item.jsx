@@ -1,6 +1,7 @@
 import React from 'react'
 import Count from '../Count/Count';
 import "./Item.css"
+import { Link } from 'react-router-dom';
 
 function Item({product}) {
   return (
@@ -9,7 +10,7 @@ function Item({product}) {
         <img className="item-image" src={product.pictureUrl}/>
         <p>{product.description}</p>
 
-        <a href="#">Ver detalle del producto</a>
+        <Link to={`/item/${product.id}`}>Ver detalle del producto</Link>
 
         <p>Stock Disponible: {product.stock}</p>
         <Count initial={0} stock={product.stock} />
