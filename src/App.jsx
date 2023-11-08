@@ -9,12 +9,13 @@ import ErrorNotFound from './components/ErrorNotFound/ErrorNotFound';
 
 
 function App() {
-  const enlaces = [
-    "Inicio",
-    "Cursos",
-    "Proyectos",
-    "Acerca de",
-    "Contacto"
+  const categorias = [
+    "Frontend",
+    "Backend",
+    "Devops",
+    "QA",
+    "Data Science",
+    "Otros Cursos"
   ]
   const nombreBrand = "Spinach Dev"
   const saludo="Bienvenidos a Spinach Dev!"
@@ -22,7 +23,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <MiNavbar links={enlaces} nombreBrand={nombreBrand} />
+        <MiNavbar links={categorias} nombreBrand={nombreBrand} />
         <Routes>
           <Route exact path="/" element={<ItemListContainer greeting={saludo} />} />
           <Route exact path="/category/:id" element={<ItemListContainer greeting={saludo} />} />

@@ -1,22 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import Item from '../Item/Item';
+import { productAPIClient } from '../../productAPIClient';
 
 function ItemList() {
   const [productData, setProductData] = useState([]);
   
   useEffect(() => {
-    const promiseData = () => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                const itemsFile = "/productos.js"
-                fetch(itemsFile)
-                .then((response) => response.json())
-                .then((data) => resolve(data))
-            }, 500);
-        });
-    }
-
-    promiseData().then((data) => {
+    productAPIClient.getData().then((data) => {
         setProductData(data)
     })
 

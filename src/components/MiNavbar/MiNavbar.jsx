@@ -20,7 +20,7 @@ const MiNavbar = ({links, nombreBrand}) => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        {links.map((x) => <Nav.Link as={Link} to={`/category/${transformToId(x)}`}>{x}</Nav.Link>)}
+                        {links.map((x) => <Nav.Link key={x} as={Link} to={`/category/${transformToId(x)}`}>{x}</Nav.Link>)}
                     </Nav>
                     </Navbar.Collapse>
                 </Container>
