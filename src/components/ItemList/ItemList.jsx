@@ -10,6 +10,7 @@ function ItemList() {
   
   useEffect(() => {
     productAPIClient.getData().then((data) => {
+        // Sustituir esto luego por cliente que traiga data de Firebase
         const filteredData = id ? data.filter((elem) => elem.category === id ) : data;
 
         setProductData(filteredData)
@@ -18,7 +19,6 @@ function ItemList() {
 
   }, [id]);
 
-  console.log(loadStatus)
 
   return (
     <div>

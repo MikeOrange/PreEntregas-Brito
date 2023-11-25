@@ -16,11 +16,14 @@ const Count = ({initial, stock}) => {
     }
 
     return(
-        <div>
-            <p>Añadidos: {count}</p>
-            <button onClick={onAdd}>+</button>
-            <button onClick={onSubstract}>-</button>
-        </div>
+        <>
+            <div>
+                <p>Añadidos: {count}</p>
+                <button onClick={onAdd}>+</button>
+                <button onClick={onSubstract}>-</button>
+            </div>
+            <button>Añadir al Carrito</button>
+        </>
     )
 }
 

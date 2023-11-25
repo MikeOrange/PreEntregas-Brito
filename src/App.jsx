@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import ErrorNotFound from './components/ErrorNotFound/ErrorNotFound';
-
+import ThemeProvider from './context/ThemeProvider';
 
 function App() {
   const categorias = [
@@ -22,6 +22,8 @@ function App() {
 
   return (
     <>
+      <ThemeProvider></ThemeProvider>
+
       <BrowserRouter>
         <MiNavbar links={categorias} nombreBrand={nombreBrand} />
         <Routes>
