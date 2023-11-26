@@ -24,7 +24,7 @@ const MiNavbar = ({links, nombreBrand}) => {
                     </Nav>
                     </Navbar.Collapse>
                 </Container>
-                <CartWidget/>
+                <Link to={"/cart"} className="cart-link"><CartWidget/></Link>
             </Navbar>
         </>
     )

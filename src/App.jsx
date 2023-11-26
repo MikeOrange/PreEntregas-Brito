@@ -6,7 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import ErrorNotFound from './components/ErrorNotFound/ErrorNotFound';
-import ThemeProvider from './context/ThemeProvider';
+import { CartProvider, CartContext } from './context/CartContext';
+import Cart from './components/Cart/Cart';
 
 function App() {
   const categorias = [
@@ -22,16 +23,17 @@ function App() {
 
   return (
     <>
-      <ThemeProvider></ThemeProvider>
-
       <BrowserRouter>
-        <MiNavbar links={categorias} nombreBrand={nombreBrand} />
-        <Routes>
-          <Route exact path="/" element={<ItemListContainer greeting={saludo} />} />
-          <Route exact path="/category/:id" element={<ItemListContainer greeting={saludo} />} />
-          <Route exact path="/item/:id" element={<ItemDetailContainer />} />
-          <Route path="*" element={<ErrorNotFound/>} />
-        </Routes>
+        <CartProvider>
+          <MiNavbar links={categorias} nombreBrand={nombreBrand} />
+          <Routes>
+            <Route exact path="/" element={<ItemListContainer greeting={saludo} />} />
+            <Route exact path="/category/:id" element={<ItemListContainer greeting={saludo} />} />
+            <Route exact path="/item/:id" element={<ItemDetailContainer />} />
+            <Route exact path="/cart" element={<Cart />} />
+            <Route path="*" element={<ErrorNotFound/>} />
+          </Routes>
+        </CartProvider>
       </BrowserRouter>
     </>
   )

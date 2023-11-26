@@ -1,3 +1,7 @@
 .titulo.nav-item {
     color: green;
 }
+
+.cart-link {
+    text-decoration: none;
+}

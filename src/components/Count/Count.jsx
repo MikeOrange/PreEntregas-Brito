@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const Count = ({initial, stock}) => {
+const Count = ({initial, stock, onCartAddCallback}) => {
     let [count, setCount] = useState(initial)
 
     const onAdd = () => {
@@ -15,6 +15,13 @@ const Count = ({initial, stock}) => {
         }
     }
 
+    const onAddToCart = () => {
+        if(onCartAddCallback) {
+            onCartAddCallback(count);
+        }
+        setCount(0);
+    }
+
     return(
         <>
             <div>
@@ -22,7 +29,7 @@ const Count = ({initial, stock}) => {
                 <button onClick={onAdd}>+</button>
                 <button onClick={onSubstract}>-</button>
             </div>
-            <button>Añadir al Carrito</button>
+            <button onClick={onAddToCart} disabled={count === 0}>Añadir al Carrito</button>
         </>
     )
 }
