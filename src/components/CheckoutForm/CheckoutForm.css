@@ -1,0 +1,32 @@
+.checkout-title {
+    margin-top: 3%;
+}
+
+.checkout-form {
+    max-width: 400px;
+    margin: 3% auto;
+}
+
+.checkout-form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.checkout-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+}
+
+.checkout-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkout-form button:hover {
+    background-color: #45a049;
+}

@@ -1,0 +1,19 @@
+.checkout-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkout-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: green;
+}
+
+.checkout-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

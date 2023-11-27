@@ -20,12 +20,17 @@ export const CartProvider = ({children}) => {
         setCartObject({...cartObject});
     }
 
+    const clearCart = () => {
+        setCartObject({});
+    }
+
     return (
         <CartContext.Provider value={
             {
                 cartObject,
                 addToCart,
-                removeFromCart
+                removeFromCart,
+                clearCart
             }
         } >
             {children}

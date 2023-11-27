@@ -3,10 +3,11 @@ import "./Cart.css"
 import { formatAsPesos } from '../../utils/currencyFormat'
 import { CartContext } from '../../context/CartContext';
 import { productAPIClient } from '../../productAPIClient';
+import CheckoutForm from '../CheckoutForm/CheckoutForm';
 
 
 function Cart() {
-  const {cartObject, removeFromCart} = useContext(CartContext);
+  const {cartObject, removeFromCart, clearCart} = useContext(CartContext);
   const [loadStatus, setLoadStatus] = useState(false);
   const [tableArray, setTableArray] = useState([]);
   const [orderPrice, setOrderPrice] = useState(0);
@@ -46,6 +47,15 @@ function Cart() {
 
   }, []);
 
+
+  if (tableArray.length === 0) {
+    return (
+      <>
+        <h2>Tabla de Productos</h2>
+        <p>Agregue productos a su carrito para proceder con la compra...</p>
+      </>
+    )
+  }
 
   return (
     <div>
@@ -88,26 +98,7 @@ function Cart() {
         </tfoot>
       </table>
 
-      <h4>Complete estos datos para finalizar su orden:</h4>
-
-      <form className='checkout-form'>
-          <label htmlFor="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" required />
-
-          <label htmlFor="apellido">Apellido:</label>
-          <input type="text" id="apellido" name="apellido" required />
-
-          <label htmlFor="telefono">Teléfono:</label>
-          <input type="tel" id="telefono" name="telefono" required />
-
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-
-          <label htmlFor="confirmarEmail">Confirmar Email:</label>
-          <input type="email" id="confirmarEmail" name="confirmarEmail" required />
-
-          <button type="submit">Comprar Ahora</button>
-      </form>
+      <CheckoutForm tableArray={tableArray} orderPrice={orderPrice} clearCart={clearCart}/>
 
     </div>
   )
