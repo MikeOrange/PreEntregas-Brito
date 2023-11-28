@@ -4,7 +4,7 @@ import { formatAsPesos } from '../../utils/currencyFormat'
 import { CartContext } from '../../context/CartContext';
 import { productAPIClient } from '../../productAPIClient';
 import CheckoutForm from '../CheckoutForm/CheckoutForm';
-
+import { FaTrash } from 'react-icons/fa';
 
 function Cart() {
   const {cartObject, removeFromCart, clearCart} = useContext(CartContext);
@@ -28,8 +28,8 @@ function Cart() {
         "id": property,
         "nombre": productData.title,
         "cantidad": cartObject[property],
-        "precioUnitario": formatAsPesos(productData.price),
-        "precio": formatAsPesos(precio)
+        "precioUnitario": productData.price,
+        "precio": precio
       }
       newOrderPrice += precio;
       newTable.push(tableRow);
@@ -38,6 +38,11 @@ function Cart() {
     setOrderPrice(newOrderPrice);
   }
 
+  const removeThisFromCart = elem => event => {
+    // Usando currying para tener id
+    removeFromCart(elem.id);
+  };
+
   useEffect(() => {
     productAPIClient.getData().then((data) => {
         // Sustituir esto luego por cliente que traiga data de Firebase
@@ -45,7 +50,7 @@ function Cart() {
         setLoadStatus(true)
     })
 
-  }, []);
+  }, [cartObject]);
 
 
   if (tableArray.length === 0) {
@@ -68,6 +73,7 @@ function Cart() {
                 <th>Cantidad</th>
                 <th>Precio Unitario</th>
                 <th>Precio</th>
+                <th>Borrar</th>
             </tr>
         </thead>
         <tbody>
@@ -79,8 +85,9 @@ function Cart() {
                       <td>{elem.id}</td>
                       <td>{elem.nombre}</td>
                       <td>{elem.cantidad}</td>
-                      <td>{elem.precioUnitario}</td>
-                      <td>{elem.precio}</td>
+                      <td>{formatAsPesos(elem.precioUnitario)}</td>
+                      <td>{formatAsPesos(elem.precio)}</td>
+                      <td>{<FaTrash className="trash-icon" onClick={removeThisFromCart(elem)} />}</td>
                     </tr>
                   )
                 })}
@@ -94,6 +101,7 @@ function Cart() {
             <tr>
                 <td colSpan="4"><b>Total</b></td>
                 <td>{formatAsPesos(orderPrice)}</td>
+                <td></td>
             </tr>
         </tfoot>
       </table>
