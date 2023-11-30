@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import Item from '../Item/Item';
 import { productAPIClient } from '../../productAPIClient';
+import "./ItemList.css"
+
 
 function ItemList() {
   const {id} = useParams();
@@ -21,9 +23,9 @@ function ItemList() {
 
 
   return (
-    <div>
+    <div className="item-list-wrapper">
         {loadStatus 
-        ? productData.length == 0 ? <p>Pronto</p> : productData.map((elem) => <Item key={elem.id} product={elem} />)
+        ? productData.length == 0 ? <p>Pronto</p> : productData.map((elem) => <Item key={elem.id} product={elem} className="item-individual" />)
         : <p>Cargando...</p> }
     </div>
   )

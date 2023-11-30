@@ -15,7 +15,7 @@ function ItemDetail({product}) {
   }
 
   return (
-    <>
+    <div className="item-detail-container">
       <h2>{product.title}</h2>
       <img className="item-detail-image" src={product.pictureUrl}/>
       <p>{product.description}</p>
@@ -25,7 +25,7 @@ function ItemDetail({product}) {
 
       <p>Stock Disponible: {product.stock}</p>
       <Count initial={0} stock={product.stock} onCartAddCallback={onAddToCart} />
-    </>
+    </div>
   )
 }
 

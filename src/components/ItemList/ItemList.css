@@ -1,0 +1,6 @@
+.item-list-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: 75%;
+}

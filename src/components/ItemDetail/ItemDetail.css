@@ -1,3 +1,12 @@
+.item-detail-container {
+    text-align: center;
+    max-width: 50%;
+    width: 100%;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .item-detail-image {
     max-width: 200px;
     width: 100%;
