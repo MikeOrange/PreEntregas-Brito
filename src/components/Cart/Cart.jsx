@@ -2,9 +2,10 @@ import React, {useContext, useState, useEffect} from 'react'
 import "./Cart.css"
 import { formatAsPesos } from '../../utils/currencyFormat'
 import { CartContext } from '../../context/CartContext';
-import { productAPIClient } from '../../productAPIClient';
 import CheckoutForm from '../CheckoutForm/CheckoutForm';
 import { FaTrash } from 'react-icons/fa';
+import { collection, getDocs, getFirestore, query, where, documentId } from "firebase/firestore"
+
 
 function Cart() {
   const {cartObject, removeFromCart, clearCart} = useContext(CartContext);
@@ -14,16 +15,17 @@ function Cart() {
 
   const obtenerObjetoPorId = (arr, x) => {
     return arr.find(function(objeto) {
-      return parseInt(objeto.id) === parseInt(x);
+      return objeto.id === x;
     });
   }
 
   const updateTable = (apiData) => {
     let newOrderPrice = 0;
     const newTable = [];
+
     for (const property in cartObject) {
       let productData = obtenerObjetoPorId(apiData, property);
-      let precio = productData.price * cartObject[property]
+      let precio = productData["price"] * cartObject[property]
       let tableRow = {
         "id": property,
         "nombre": productData.title,
@@ -39,17 +41,34 @@ function Cart() {
   }
 
   const removeThisFromCart = elem => event => {
-    // Usando currying para tener id
     removeFromCart(elem.id);
   };
 
-  useEffect(() => {
-    productAPIClient.getData().then((data) => {
-        // Sustituir esto luego por cliente que traiga data de Firebase
-        updateTable(data)
-        setLoadStatus(true)
-    })
+  const getNewData = () => {
+    const db = getFirestore();
+    const itemsRef = collection(db, "items");
+    const cartKeys = Object.keys(cartObject);
 
+    if (cartKeys.length !== 0) { 
+      const q = query(
+        itemsRef,
+        where(documentId(), "in", cartKeys)
+      );
+
+      getDocs(q).then((snapshot) => {
+        updateTable(snapshot.docs.map((doc) => {
+          return {"id": doc.id, ...doc.data()}
+        }))
+        setLoadStatus(true);
+      })
+    } else {
+      updateTable([]);
+      setLoadStatus(true);
+    }
+  }
+
+  useEffect(() => {
+    getNewData();
   }, [cartObject]);
 
 

@@ -1,8 +1,22 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto consiste en una tienda online de prueba para coderhouse. El tema
+en este caso es el de una tienda de cursos online
 
-Currently, two official plugins are available:
+# Requerimientos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Se debe contar con:
+- npm version 8+
+- node version 16+
+
+Para obtener las credenciales adecuadas de Firebase comunicarse con el autor
+
+## Instrucciones 
+
+Para ejecutar el proyecto:
+
+1. Descargue el proyecto usando `git clone`
+2. Ir hacia el directorio principal del proyecto
+3. Ejecutar `npm install`
+4. Ejecutar `npm run dev`
+5. Abrir en el navegador: `localhost:5173`

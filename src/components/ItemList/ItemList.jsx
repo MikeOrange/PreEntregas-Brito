@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import Item from '../Item/Item';
-import { productAPIClient } from '../../productAPIClient';
 import "./ItemList.css"
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore"
 
 
 function ItemList() {
@@ -11,14 +11,25 @@ function ItemList() {
   const [loadStatus, setLoadStatus] = useState(false);
   
   useEffect(() => {
-    productAPIClient.getData().then((data) => {
-        // Sustituir esto luego por cliente que traiga data de Firebase
-        const filteredData = id ? data.filter((elem) => elem.category === id ) : data;
+    const db = getFirestore();
 
-        setProductData(filteredData)
-        setLoadStatus(true)
+    const itemsRef = collection(db, "items");
+    let q;
+    if (id) {
+      q = query(
+        itemsRef,
+        where("category", "==", id)
+      );
+    } else {
+      q = query(itemsRef);
+    }
+
+    getDocs(q).then((snapshot) => {
+      setProductData(snapshot.docs.map((doc) => {
+        return {"id": doc.id, ...doc.data()}
+      }))
+      setLoadStatus(true);
     })
-
   }, [id]);
 
 

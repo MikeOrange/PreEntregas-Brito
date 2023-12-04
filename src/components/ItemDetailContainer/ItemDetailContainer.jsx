@@ -1,10 +1,10 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Item from '../Item/Item';
 import ItemDetail from '../ItemDetail/ItemDetail';
-import { productAPIClient } from '../../productAPIClient';
 import ErrorNotFound from '../ErrorNotFound/ErrorNotFound';
+import { doc, getDoc, getFirestore} from "firebase/firestore"
+
 
 function ItemDetailContainer() {
   const {id} = useParams();
@@ -12,13 +12,18 @@ function ItemDetailContainer() {
   const [loadStatus, setLoadStatus] = useState(false);
 
   useEffect(() => {
-    productAPIClient.getData().then((data) => {
-        const filteredProduct = data.find((product) => product.id.toString() == id);
-        setProductData(filteredProduct)
-        setLoadStatus(true)
+    const db = getFirestore();
+    const itemsRef = doc(db, "items", id);
+
+    getDoc(itemsRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        setProductData({"id": id, ...snapshot.data()});
+      } else {
+        setProductData(null);
+      }
+      setLoadStatus(true);
     })
-  
-  }, []);
+  }, [id]);
 
   return (
     <div>
