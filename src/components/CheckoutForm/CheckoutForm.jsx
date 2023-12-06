@@ -1,10 +1,22 @@
 import React from 'react'
 import "./CheckoutForm.css"
 import { useNavigate } from 'react-router-dom';
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+
 
 function CheckoutForm({tableArray, orderPrice, clearCart}) {
     
     const navigate = useNavigate();
+
+    const saveToDb = (orderObject) => {
+        const db = getFirestore();
+        const ordersCollection = collection(db, "orders");
+
+        addDoc(ordersCollection, orderObject).then(({ id }) => {
+            clearCart();
+            navigate(`/checkout?orderId=${id}`);
+        });
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -17,18 +29,17 @@ function CheckoutForm({tableArray, orderPrice, clearCart}) {
 
         const orderObject = {
             "items": tableArray,
-            "totalOrden": orderPrice,
-            "nombre": formData.get("nombre"),
-            "apellido": formData.get("apellido"),
-            "telefono": formData.get("telefono"),
-            "email": formData.get("email"),
-            "estado": "generada"
+            "total": orderPrice,
+            "buyer": {
+                "nombre": formData.get("nombre"),
+                "apellido": formData.get("apellido"),
+                "telefono": formData.get("telefono"),
+                "email": formData.get("email"),
+                "estado": "generada"
+            }
         }
-        clearCart();
         
-        const orderId = crypto.randomUUID();
-
-        navigate(`/checkout?orderId=${orderId}`);
+        saveToDb(orderObject);
     }
 
 
